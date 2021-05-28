@@ -15,5 +15,6 @@ including services such as :
 
 ### Runngin Project
 1. Clone The Project
-2. docker-compose run --rm composer  create-project laravel/laravel .
-3. docker-compose up -d server
+2. Create src directory in project root for containing laravel application codes
+3. docker-compose run --rm composer  create-project laravel/laravel .
+4. docker-compose up -d server
