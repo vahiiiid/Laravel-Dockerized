@@ -18,3 +18,9 @@ including services such as :
 2. docker-compose run --rm composer  create-project laravel/laravel .
 3. docker-compose up -d server
 4. open project in localhost:8000
+
+### Upgrade note
+To upgrade the project you need to pull and re-create containers with the latest images.
+So you can stop containers and then run docker-composer with this options:
+
+docker-compose up --force-recreate --build -d server
