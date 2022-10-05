@@ -24,3 +24,13 @@ To upgrade the project you need to pull and re-create containers with the latest
 So you can stop containers and then run docker-composer with this options:
 
 docker-compose up --force-recreate --build -d server
+
+### Services Guide
+#### PhpMyadmin
+To run this service simply use this command:
+  ```sh
+  docker-compose up -d phpmyadmin
+  ```
+Then you can open 192.168.10.80 to see phpmyadmin login page.
+Mysql user definition is in env/mysql.env you can use them to log in.
+To change the ip or port you can simply edit docker-compose.yml and phpmyadmin service. 
