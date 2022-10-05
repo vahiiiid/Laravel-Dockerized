@@ -23,6 +23,9 @@ services:
     image: mysql:5.7
     env_file:
       - ./env/mysql.env
+    networks:
+      dockerbridge.local:
+        ipv4_address: 192.168.10.50
   composer:
     build:
       context: dockerfiles
@@ -42,6 +45,16 @@ services:
     entrypoint: [ "npm" ]
     volumes:
       - ./src:/var/www/html
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      dockerbridge.local:
+        ipv4_address: 192.168.10.80
 
 networks:
   dockerbridge.local:
@@ -50,4 +63,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.100.0/24
+        - subnet: 192.168.10.0/24
