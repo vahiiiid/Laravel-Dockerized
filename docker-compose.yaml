@@ -4,7 +4,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: dockerfiles/nginx.dockerfile
+      dockerfile: services/nginx/nginx.dockerfile
     ports:
       - '8000:80'
     volumes:
@@ -16,26 +16,26 @@ services:
   php:
     build:
       context: .
-      dockerfile: dockerfiles/php.dockerfile
+      dockerfile: services/php/php.dockerfile
     volumes:
       - ./src:/var/www/html
   mysql:
     image: mysql:latest
     env_file:
-      - ./env/mysql.env
+      - services/mysql/mysql.env
     networks:
       dockerbridge.local:
         ipv4_address: 192.168.10.50
   composer:
     build:
-      context: dockerfiles
-      dockerfile: composer.dockerfile
+      context: .
+      dockerfile: services/composer/composer.dockerfile
     volumes:
       - ./src:/var/www/html
   artisan:
     build:
       context: .
-      dockerfile: dockerfiles/php.dockerfile
+      dockerfile: services/php/php.dockerfile
     volumes:
       - ./src:/var/www/html
     entrypoint: [ "php", "/var/www/html/artisan" ]
