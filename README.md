@@ -32,5 +32,5 @@ To run this service simply use this command:
   docker-compose up -d phpmyadmin
   ```
 Then you can open 192.168.10.80 to see phpmyadmin login page.
-Mysql user definition is in env/mysql.env you can use them to log in.
+Mysql user definition is in service/mysql/mysql.env you can use them to log in.
 To change the ip or port you can simply edit docker-compose.yml and phpmyadmin service. 
