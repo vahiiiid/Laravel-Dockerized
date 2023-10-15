@@ -20,6 +20,7 @@ services:
       dockerfile: services/php/php.dockerfile
     volumes:
       - ./src:/var/www/html
+      - ./services/php/config/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini:ro
 
   mysql:
     image: mysql:latest
