@@ -13,12 +13,14 @@ services:
     depends_on:
       - php
       - mysql
+
   php:
     build:
       context: .
       dockerfile: services/php/php.dockerfile
     volumes:
       - ./src:/var/www/html
+
   mysql:
     image: mysql:latest
     env_file:
@@ -26,12 +28,24 @@ services:
     networks:
       dockerbridge.local:
         ipv4_address: 192.168.10.50
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    volumes:
+      - laravel-dockerized-redis:/data
+    networks:
+      dockerbridge.local:
+        ipv4_address: 192.168.0.60
+
   composer:
     build:
       context: .
       dockerfile: services/composer/composer.dockerfile
     volumes:
       - ./src:/var/www/html
+
   artisan:
     build:
       context: .
@@ -39,12 +53,14 @@ services:
     volumes:
       - ./src:/var/www/html
     entrypoint: [ "php", "/var/www/html/artisan" ]
+
   npm:
     image: node:14
     working_dir: /var/www/html
     entrypoint: [ "npm" ]
     volumes:
       - ./src:/var/www/html
+
   phpmyadmin:
     image: phpmyadmin
     restart: always
@@ -55,6 +71,10 @@ services:
     networks:
       dockerbridge.local:
         ipv4_address: 192.168.10.80
+
+volumes:
+  laravel-dockerized-redis:
+    driver: local
 
 networks:
   dockerbridge.local:
