@@ -23,6 +23,11 @@ services:
 
   mysql:
     image: mysql:latest
+    ports:
+      -  '3306:3306'
+    volumes:
+      - laravel-dockerized-mysql:/var/lib/mysql
+      - ./services/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf.d:ro
     env_file:
       - services/mysql/mysql.env
     networks:
@@ -74,6 +79,8 @@ services:
 
 volumes:
   laravel-dockerized-redis:
+    driver: local
+  laravel-dockerized-mysql:
     driver: local
 
 networks:
